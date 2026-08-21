@@ -1,7 +1,10 @@
-name: Git Learning
+name: Test Project
 
 on:
   push:
+    branches:
+      - main
+  pull_request:
     branches:
       - main
 
@@ -10,5 +13,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Say hello
-        run: echo "GitHub Actions is working!"
+      - name: Get repository
+        uses: actions/checkout@v4
+
+      - name: Check index.html
+        run: test -f index.html
+
+      - name: Success
+        run: echo "All tests passed!"
